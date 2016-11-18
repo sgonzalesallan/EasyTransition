@@ -130,7 +130,7 @@ extension EasyTransition : UIViewControllerTransitioningDelegate ,UIViewControll
 
     // TransitioningDelegate
     
-    public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController, sourceViewController source: UIViewController) -> UIPresentationController? {
+   public func presentationControllerForPresentedViewController(presented: UIViewController, presentingViewController presenting: UIViewController?, sourceViewController source: UIViewController) -> UIPresentationController? {
         let presentationController = PresentationController(presentedViewController:presented, presentingViewController:presenting)
         presentationController.direction = direction
         presentationController.backgroundColor = backgroundColor
@@ -171,9 +171,9 @@ extension EasyTransition : UIViewControllerTransitioningDelegate ,UIViewControll
         
         self.transitionContext = transitionContext
         
-        guard let containerView = transitionContext.containerView(),
-            fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
-            toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
+        guard let containerView = transitionContext.containerView() as? UIView,
+            let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey),
+            let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)
             else {
                 return
         }
